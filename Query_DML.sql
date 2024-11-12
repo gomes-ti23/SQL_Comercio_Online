@@ -1,19 +1,20 @@
 USE DBProducoes
 GO
 
--- Alteração do tamanho da coluna nom_pessoa
+-- AlteraÃ§Ã£o do tamanho da coluna nom_pessoa
 ALTER TABLE pessoa ALTER COLUMN nom_pessoa varchar(1000) NOT NULL;
 
---Inclusão do campo ind_status na coluna titulo
+--InclusÃ£o do campo ind_status na coluna titulo apÃ³s o schema fÃ­sico ter sido criado
 ALTER TABLE titulo ADD ind_status char(1) NOT NULL;
 
--- Início dos comandos DML
+-- InÃ­cio dos comandos DML
 
--- Total de títulos ativos
+-- Total de tÃ­tulos ativos
+-- Irei demostrar com 2Âº opÃ§Ãµes diferentes.
 
--- 1º Opção utilizando CASE
-SELECT nom_titulo AS "Nome Do Título", ind_status,
-"Status Título" =
+-- 1Âº OpÃ§Ã£o utilizando CASE
+SELECT nom_titulo AS "Nome Do TÃ­tulo", ind_status,
+"Status TÃ­tulo" =
 	CASE
 		WHEN ind_status = 'A' THEN 'ATIVO'
 		WHEN ind_status <> 'A' THEN 'INATIVO'
@@ -22,18 +23,18 @@ FROM titulo
 ORDER BY nom_titulo ASC
 GO
 
--- 2º Opção utilizando o WHERE
+-- 2Âº OpÃ§Ã£o utilizando o WHERE
 SELECT nom_titulo, ind_status
 FROM titulo
 WHERE ind_status = 'A' 
 ORDER BY nom_titulo ASC;
 
--- Total de Títulos Ativos
-SELECT COUNT(*) AS "Total Títulos Ativos"
+-- Total de TÃ­tulos Ativos
+SELECT COUNT(*) AS "Total TÃ­tulos Ativos"
 FROM titulo
 WHERE ind_status = 'A';
 
--- Relação de títulos com seus detalhes em ordem alfabética
+-- RelaÃ§Ã£o de tÃ­tulos com seus detalhes em ordem alfabÃ©tica
 SELECT titulo.nom_titulo,
 	   titulo_detalhe.nom_principal_titulo,
 	   titulo_detalhe.nom_original_titulo,
@@ -45,7 +46,7 @@ FROM titulo
 JOIN titulo_detalhe ON titulo.cod_titulo = titulo_detalhe.cod_titulo
 ORDER BY titulo.nom_titulo ASC;
 
--- Relação de títulos em ordem alfabética com seus autores e diretores(quando existirem)
+-- RelaÃ§Ã£o de tÃ­tulos em ordem alfabÃ©tica com seus autores e diretores(quando existirem)
 SELECT titulo.nom_titulo, elenco.dsc_funcao, pessoa.nom_pessoa
 FROM titulo
 JOIN elenco ON titulo.cod_titulo = elenco.cod_titulo
@@ -53,57 +54,58 @@ JOIN pessoa ON elenco.cod_pessoa = pessoa.cod_pessoa
 WHERE dsc_funcao = 'director' OR dsc_funcao = 'author'
 ORDER BY titulo.nom_titulo ASC, elenco.dsc_funcao ASC;
 
--- Relação dos 100 títulos mais bem avaliados, com suas avaliações e total de votos.
+-- RelaÃ§Ã£o dos 100 tÃ­tulos mais bem avaliados, com suas avaliaÃ§Ãµes e total de votos.
 SELECT TOP(100)titulo.nom_titulo, classificacao_media, qtd_votos 
 FROM titulo
 JOIN avaliacao ON titulo.cod_titulo = avaliacao.cod_titulo
 ORDER BY classificacao_media DESC
 
--- A Empresa solicitou que faça uma espécie de "auditoria de qualidade dos dados". Para isso crie as seguintes querys
+-- Foi solicitado pela empresa que faÃ§a uma espÃ©cie de "auditoria de qualidade dos dados"
+-- Com isso foi feito as seguintes querys
 
--- Títulos sem avaliação
+-- TÃ­tulos sem avaliaÃ§Ã£o
 SELECT * 
 FROM titulo LEFT JOIN avaliacao
 ON titulo.cod_titulo = avaliacao.cod_titulo
 WHERE avaliacao.cod_titulo IS NULL
 
 
---Títulos sem o detalhe da duração ou informação do gênero
+--TÃ­tulos sem o detalhe da duraÃ§Ã£o ou informaÃ§Ã£o do gÃªnero
 SELECT *
 FROM titulo LEFT JOIN titulo_detalhe
 ON titulo.cod_titulo = titulo_detalhe.cod_titulo
 WHERE titulo_detalhe.qtd_minutos IS NULL OR titulo_detalhe.dsc_genero IS NULL
 
--- Títulos sem autor
+-- TÃ­tulos sem autor
 SELECT *
 FROM titulo LEFT JOIN avaliacao
 ON titulo.cod_titulo = avaliacao.cod_titulo
 WHERE avaliacao.cod_titulo IS NULL
 
--- Título sem diretor
+-- TÃ­tulo sem diretor
 SELECT *
 FROM titulo 
 LEFT JOIN direcao
 ON titulo.cod_titulo = direcao.cod_titulo
 WHERE direcao.cod_titulo IS NULL
 
--- Título sem elenco
+-- TÃ­tulo sem elenco
 SELECT *
 FROM titulo 
 LEFT JOIN elenco
 ON titulo.cod_titulo = elenco.cod_titulo
 WHERE elenco.cod_titulo IS NULL
 
--- Por fim, a empresa solicitou que seja desenvolvido em apenas uma query o retorno das seguintes
--- colunas acerca dos títulos ativos, ordenados alfabeticamente pelo nome do título
--- Nome do título, Tipo do título(em maiúsculo), ano de lançamento, duração, gênero, nota, autor e diretor
--- Todos se existirem ou não
+-- Por fim, a empresa solicitou que fosse desenvolvido em apenas uma query o retorno das seguintes
+-- colunas acerca dos tÃ­tulos ativos, ordenados alfabeticamente pelo nome do tÃ­tulo.
+-- Nome do tÃ­tulo, Tipo do tÃ­tulo(em maiÃºsculo), Ano de LanÃ§amento, DuraÃ§Ã£o, GÃªnero, Nota, Autor e Diretor
+-- Todos se existirem ou nÃ£o
 
-SELECT titulo.nom_titulo AS "Nome do Título",
-       UPPER(titulo_detalhe.tip_titulo) AS "Tipo do Título",
-       titulo_detalhe.ano_lancamento AS "Ano de Lançamento",
-       titulo_detalhe.qtd_minutos AS "Duração",
-       titulo_detalhe.dsc_genero AS "Gênero",
+SELECT titulo.nom_titulo AS "Nome do TÃ­tulo",
+       UPPER(titulo_detalhe.tip_titulo) AS "Tipo do TÃ­tulo",
+       titulo_detalhe.ano_lancamento AS "Ano de LanÃ§amento",
+       titulo_detalhe.qtd_minutos AS "DuraÃ§Ã£o",
+       titulo_detalhe.dsc_genero AS "GÃªnero",
        avaliacao.classificacao_media AS "Nota",
        autor.nom_pessoa AS "Autor",
        diretor.nom_pessoa AS "Diretor"
@@ -117,5 +119,4 @@ LEFT JOIN pessoa AS diretor ON direcao.cod_pessoa = diretor.cod_pessoa
 WHERE titulo.ind_status = 'A'
 ORDER BY titulo.nom_titulo ASC;
 
--- Foi necessário o uso de Aliases diferentes para distinguir o autor do diretor já que ambos 
--- estão na tabela Pessoa.
+-- Foi necessÃ¡rio o uso de aliases diferentes para distinguir o autor do diretor jÃ¡ que ambos estÃ£o na tabela Pessoa.
