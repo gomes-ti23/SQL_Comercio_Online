@@ -21,3 +21,6 @@ Uma grande empresa de comércio online precisa de um sistema para armazenar info
 
 ## 🏗️ Estrutura do Projeto
 O projeto engloba a criação de tabelas usando DDL e consultas com DML, aplicando conceitos de normalização e integridade relacional.
+
+## 🔍 Perguntas de Negócio e Ajustes na Estrutura
+Após a criação do banco de dados, foram formuladas diversas perguntas de negócio para direcionar as consultas e analisar os dados armazenados. Essas perguntas estão destacadas antes de cada query no código. Além disso, ajustes na estrutura do banco foram realizados com base nas necessidades identificadas ao responder essas perguntas, garantindo que o modelo atendesse aos requisitos de informação da empresa.
