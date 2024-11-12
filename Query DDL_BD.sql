@@ -1,8 +1,8 @@
--- CriaÁ„o do Banco de Dados
+-- Cria√ß√£o do Banco de Dados
 CREATE DATABASE DBProducoes
 GO
 
--- CriaÁ„o de todos objetos necess·rios ao banco.
+-- Cria√ß√£o de todos objetos necess√°rios ao banco e seus relacionamentos.
 USE DBProducoes
 GO
 
