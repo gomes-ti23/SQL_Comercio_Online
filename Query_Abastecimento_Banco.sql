@@ -1,9 +1,9 @@
 USE DBProducoes
 GO
 
--- Inserção dos dados nas tabelas do banco respeitando a sua ordem de precedência.
+-- InserÃ§Ã£o dos dados nas tabelas do banco respeitando suas respectivas ordens de precedÃªncia.
 BULK INSERT dbo.titulo
-FROM 'C:\Dados do Trabalho Prático SQL\Titulo.txt'
+FROM 'C:\Dados do Trabalho PrÃ¡tico SQL\Titulo.txt'
 WITH (
 	FIELDTERMINATOR = '\t',
 	ROWTERMINATOR = '\n',
@@ -11,7 +11,7 @@ WITH (
 	);
 
 BULK INSERT dbo.pessoa
-FROM 'C:\Dados do Trabalho Prático SQL\Pessoa.txt'
+FROM 'C:\Dados do Trabalho PrÃ¡tico SQL\Pessoa.txt'
 WITH (
 	FIELDTERMINATOR = '\t',
 	ROWTERMINATOR = '\n',
@@ -22,7 +22,7 @@ USE DBProducoes
 GO
 
 BULK INSERT dbo.direcao
-FROM 'C:\Dados do Trabalho Prático SQL\Direcao.txt'
+FROM 'C:\Dados do Trabalho PrÃ¡tico SQL\Direcao.txt'
 WITH (
 	FIELDTERMINATOR = '\t',
 	ROWTERMINATOR = '\n',
@@ -30,7 +30,7 @@ WITH (
 	);
 
 BULK INSERT dbo.autoria
-FROM 'C:\Dados do Trabalho Prático SQL\Autoria.txt'
+FROM 'C:\Dados do Trabalho PrÃ¡tico SQL\Autoria.txt'
 WITH (
 	FIELDTERMINATOR = '\t',
 	ROWTERMINATOR = '\n',
@@ -38,7 +38,7 @@ WITH (
 	);
 
 BULK INSERT dbo.elenco
-FROM 'C:\Dados do Trabalho Prático SQL\Elenco.txt'
+FROM 'C:\Dados do Trabalho PrÃ¡tico SQL\Elenco.txt'
 WITH (
 	FIELDTERMINATOR = '\t',
 	ROWTERMINATOR = '\n',
@@ -46,7 +46,7 @@ WITH (
 	);
 
 BULK INSERT dbo.avaliacao
-FROM 'C:\Dados do Trabalho Prático SQL\Avaliacao.txt'
+FROM 'C:\Dados do Trabalho PrÃ¡tico SQL\Avaliacao.txt'
 WITH (
 	FIELDTERMINATOR = '\t',
 	ROWTERMINATOR = '\n',
@@ -54,7 +54,7 @@ WITH (
 	);
 
 BULK INSERT dbo.titulo_detalhe
-FROM 'C:\Dados do Trabalho Prático SQL\Titulo_Detalhe.txt'
+FROM 'C:\Dados do Trabalho PrÃ¡tico SQL\Titulo_Detalhe.txt'
 WITH (
 	FIELDTERMINATOR = '\t',
 	ROWTERMINATOR = '\n',
